@@ -1,0 +1,15 @@
+def options(opt):
+    pass
+
+def configure(conf):
+    pass
+
+def build(bld):
+  bld.program(
+    features = 'cxx cprogram',
+    source = ['PerformanceTest.cpp'
+          ],
+    target = 'PerformanceTest',
+    include = '.',
+    use = 'SETARRAY'
+    )

@@ -1,0 +1,23 @@
+def options(opt):
+    pass
+
+def configure(conf):
+    pass
+
+def build(bld):
+    bld.shlib(
+        features = 'cxx cshlib',
+        source = ['SetArrayBuilder.cpp',
+        					'SetArray.cpp'
+                  ],
+        target = 'SetArray',
+        name = 'SETARRAY',
+        use = 'RSDIC'
+        )  
+    bld.install_files('${PREFIX}/include/setarray', bld.path.ant_glob('*.hpp'))
+    bld.program(features = 'gtest',
+                source 	 = 'SetArrayTest.cpp',
+                includes = '.',
+                target   = 'SetArrayTest',
+                use = ['SETARRAY']
+                )
