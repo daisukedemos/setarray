@@ -2,7 +2,7 @@
 #define SETARRAY_SETARRAY_HPP_
 
 #include <vector>
-#include "../third_party/RSDic.hpp"
+#include <rsdic/RSDic.hpp>
 
 
 namespace setarray{
@@ -35,8 +35,6 @@ public:
 	std::vector<uint64_t> Lookup(uint64_t pos) const;
 	uint64_t Rank(uint64_t val, uint64_t pos) const;
 	uint64_t Select(uint64_t val, uint64_t ind) const;
-	Result Max(uint64_t beg, uint64_t end) const;
-	Result Min(uint64_t beg, uint64_t end) const;
 	uint64_t GetMemorySize() const;
 
 private:
@@ -45,7 +43,7 @@ private:
 
 	uint64_t SelectInside(uint64_t depth, uint64_t val, uint64_t ind, uint64_t pos) const;
 
-	uint64_t length_;	
+	uint64_t length_;
 	uint64_t total_num_;
 	uint64_t max_num_;
 	uint64_t max_depth_;

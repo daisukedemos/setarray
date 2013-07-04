@@ -3,7 +3,7 @@ import sys
 
 top = '.'
 out = 'build'
-subdirs = ['app', 'lib', 'third_party']
+subdirs = ['app', 'lib']
 
 def options(opt):
     opt.load('compiler_cxx unittest_gtest')
@@ -12,6 +12,7 @@ def options(opt):
 def configure(conf):
     conf.env.CXXFLAGS += ['-W', '-Wall', '-Wextra', '-Wold-style-cast', '-g', '-O2', '-fopenmp']
     conf.load('compiler_cxx unittest_gtest')
+    conf.check_cfg(package='rsdic', args='--cflags --libs', uselib_store='RSDIC')
     conf.recurse(subdirs)
 
 def build(bld):

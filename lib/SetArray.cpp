@@ -103,64 +103,9 @@ uint64_t SetArray::SelectInside(uint64_t depth, uint64_t val, uint64_t ind, uint
 	}
 }
 
+
 uint64_t SetArray::Select(uint64_t val, uint64_t ind) const{
  	return SelectInside(0, val, ind, 0);
-}
-
-Result SetArray::Max(uint64_t beg, uint64_t end) const{
-	uint64_t bpos = 0;
-	Result ret;
-	ret.val = 0;
-	for (uint64_t depth = 0; depth < max_depth_; ++depth){
-		const RSDic& rsdz = layers_[depth].first;
-		const RSDic& rsdo = layers_[depth].second;
-		uint64_t beg_zero = rsdz.Rank(beg, 1);
-		uint64_t end_zero = rsdz.Rank(end, 1);
-		uint64_t beg_one  = beg - beg_zero;
-		uint64_t end_one  = end - end_zero;
-
-		if (end_one - beg_one > 0){
-			beg = rsdz.one_num() + beg_one;
-			end = rsdz.one_num() + end_one;
-			bpos = rsdz.one_num() + rsdo.Rank(bpos, 1);
-			ret.val = (ret.val << 1) + 1;
-		} else {
-			beg = beg_zero;
-			end = end_zero;
-			bpos = rsdz.Rank(bpos, 1);
-			ret.val <<= 1;
-		} 
-	}
-	uint64_t rank = beg - bpos;
-	ret.pos = Select(ret.val, rank);
-}
-
-Result SetArray::Min(uint64_t beg, uint64_t end) const{
-	uint64_t bpos = 0;
-	Result ret;
-	ret.val = 0;
-	for (uint64_t depth = 0; depth < max_depth_; ++depth){
-		const RSDic& rsdz = layers_[depth].first;
-		const RSDic& rsdo = layers_[depth].second;
-		uint64_t beg_zero = rsdz.Rank(beg, 1);
-		uint64_t end_zero = rsdz.Rank(end, 1);
-		uint64_t beg_one  = beg - beg_zero;
-		uint64_t end_one  = end - end_zero;
-
-		if (end_zero - beg_zero > 0){
-			beg = beg_zero;
-			end = end_zero;
-			bpos = rsdz.Rank(bpos, 1);
-			ret.val <<= 1;
-		} else{
-			beg = rsdz.one_num() + beg_one;
-			end = rsdz.one_num() + end_one;
-			bpos = rsdz.one_num() + rsdo.Rank(bpos, 1);
-			ret.val = (ret.val << 1) + 1;
-		} 
-	}
-	uint64_t rank = beg - bpos;
-	ret.pos = Select(ret.val, rank);
 }
 
 uint64_t SetArray::GetMemorySize() const{

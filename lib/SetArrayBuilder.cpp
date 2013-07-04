@@ -1,7 +1,7 @@
 #include <algorithm>
 #include "SetArray.hpp"
 #include "SetArrayBuilder.hpp"
-#include "../third_party/RSDicBuilder.hpp"
+#include <rsdic/RSDicBuilder.hpp>
 
 using std::vector;
 using std::pair;
@@ -76,7 +76,7 @@ for (uint64_t i = 0; i < v.size();){
 namespace setarray{
 
 SetArrayBuilder::SetArrayBuilder() {
-}  
+}
 
 void SetArrayBuilder::Add(const vector<uint64_t>& vals){
 	for (size_t i = 0; i < vals.size(); ++i){
